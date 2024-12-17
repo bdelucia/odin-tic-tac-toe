@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    
+    <h1 class="header">Tic-Tac-Toe</h1>
+    <div class="gameBoard"></div>
+    <label>Row (0-2): <input id="rowInput" type="number" min="0" max="2"></label>
+    <label>Col (0-2): <input id="colInput" type="number" min="0" max="2"></label>
+    <button id="submitMove">Make Move</button>
 </body>
 </html>

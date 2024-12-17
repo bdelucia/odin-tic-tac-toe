@@ -1,0 +1,9 @@
+.header {
+    text-align: center;
+}
+
+.gameBoard {
+    display: grid;
+    align-self: center;
+    justify-content: center;
+}
