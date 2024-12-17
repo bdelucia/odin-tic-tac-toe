@@ -7,3 +7,11 @@
     align-self: center;
     justify-content: center;
 }
+
+.scoreHeader {
+    text-align: center;
+}
+
+.player1Score, .player2Score{
+    text-align: center;
+}

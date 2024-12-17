@@ -6,6 +6,8 @@ const ticTacToe = (function () {
         ["_", "_", "_"] 
     ]
     let currentPlayer = "X"; /* private */
+    let player1Wins = 0;
+    let player2Wins = 0;
 
     /* Public functions */
 
@@ -32,19 +34,35 @@ const ticTacToe = (function () {
 
     /* Marks cells in the board based on row and col given, returns true if winning condition achieved with the move */
     function makeMove(row, col){
+        const retryButton = document.createElement('button');
+        const makeMoveButton = document.querySelector('#submitMove');
+        const player1ScoreLabel = document.querySelector('.player1Score');
+        const player2ScoreLabel = document.querySelector('.player2Score');
+
         if(board[row][col] === "_"){
             board[row][col] = currentPlayer;
             printBoard()
             if(checkWin()){
                 alert(`${currentPlayer} wins!`);
-                const retryButton = document.createElement('button');
-                const makeMoveButton = document.querySelector('#submitMove');
+                if(currentPlayer === 'X'){
+                    player1Wins++;
+                    player1ScoreLabel.textContent = player1ScoreLabel.textContent.slice(0, -1) + player1Wins;
+                } else {
+                    player2Wins++;
+                    player2ScoreLabel.textContent = player2ScoreLabel.textContent.slice(0, -1) + player2Wins;
+                }
+
                 retryButton.textContent = "Play another";
+                retryButton.style.position = "fixed"
+                retryButton.style.top = "50%";        
+                retryButton.style.left = "50%";    
+                retryButton.style.transform = "translate(-50%, -50%)"; 
                 retryButton.addEventListener('click', () => {
                     resetGame();
                     makeMoveButton.disabled = false;
                     retryButton.remove();
                 })
+
                 document.body.appendChild(retryButton);
                 return true;
             }
