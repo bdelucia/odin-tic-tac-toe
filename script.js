@@ -9,6 +9,16 @@ const ticTacToe = (function () {
 
     /* Public functions */
 
+    function resetGame(){
+        board = [ /* private */
+            ["_", "_", "_"],
+            ["_", "_", "_"],
+            ["_", "_", "_"] 
+        ]
+        currentPlayer = "X";
+        printBoard();
+    }
+
     /* Appends board with some | to show a grid in the webpage */
     function printBoard() {
         let gameBoard = document.querySelector(".gameBoard");
@@ -27,6 +37,15 @@ const ticTacToe = (function () {
             printBoard()
             if(checkWin()){
                 alert(`${currentPlayer} wins!`);
+                const retryButton = document.createElement('button');
+                const makeMoveButton = document.querySelector('#submitMove');
+                retryButton.textContent = "Play another";
+                retryButton.addEventListener('click', () => {
+                    resetGame();
+                    makeMoveButton.disabled = false;
+                    retryButton.remove();
+                })
+                document.body.appendChild(retryButton);
                 return true;
             }
             currentPlayer = currentPlayer === "X" ? "O" : "X"; /* Flips the player */
