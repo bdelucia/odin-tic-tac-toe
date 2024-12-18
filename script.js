@@ -108,11 +108,11 @@ const ticTacToe = (function () {
 // })();
 
 const playGame = (function () {
-    ticTacToe.printBoard();
+    
 
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
-        cells.addEventListener('click', (e) => {
+        cell.addEventListener('click', (e) => {
             const cellID = e.target.id;
             let row, col;
             switch(cellID){
@@ -154,8 +154,9 @@ const playGame = (function () {
                     break;
             }
             if(row !== undefined && col !== undefined){
-                const gameOver = ticTacToe.makeMove(row,col);
                 e.target.textContent = ticTacToe.getCurrentPlayer();
+                const gameOver = ticTacToe.makeMove(row,col);
+                
 
                 if(gameOver){
                     cells.forEach(cell => cell.removeEventListener("click", () => {}));
