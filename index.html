@@ -9,7 +9,19 @@
 </head>
 <body>
     <h1 class="header">Tic-Tac-Toe</h1>
-    <div class="gameBoard"></div>
+    <div class="boardContainer">
+        <div class="gameBoard">
+            <div class="cell" id="cell-1">X</div>
+            <div class="cell" id="cell-2">X</div>
+            <div class="cell" id="cell-3">X</div>
+            <div class="cell" id="cell-4">X</div>
+            <div class="cell" id="cell-5">X</div>
+            <div class="cell" id="cell-6">X</div>
+            <div class="cell" id="cell-7">X</div>
+            <div class="cell" id="cell-8">X</div>
+            <div class="cell" id="cell-9">X</div>
+        </div>
+    </div>
     <label>Row (0-2): <input id="rowInput" type="number" value="0" min="0" max="2"></label>
     <label>Col (0-2): <input id="colInput" type="number" value="0" min="0" max="2"></label>
     <button id="submitMove">Make Move</button>

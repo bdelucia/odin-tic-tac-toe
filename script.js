@@ -24,11 +24,11 @@ const ticTacToe = (function () {
     /* Appends board with some | to show a grid in the webpage */
     function printBoard() {
         let gameBoard = document.querySelector(".gameBoard");
-        gameBoard.innerHTML = "";
+        //gameBoard.innerHTML = "";
         board.forEach(row => {
             const rowDiv = document.createElement("div"); 
             rowDiv.textContent = row.join(" | "); 
-            gameBoard.appendChild(rowDiv); 
+            //gameBoard.appendChild(rowDiv); 
         });
     }
 

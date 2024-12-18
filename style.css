@@ -1,11 +1,41 @@
+html, body {
+    font-family: 'Inter';
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height for vertical centering */
+    margin: 0;
+    gap: 15px;
+}
 .header {
     text-align: center;
 }
 
+.boardContainer {
+    display: flex;
+    justify-content: center;
+    background-color: lightgray;
+    width: fit-content;
+}
+
 .gameBoard {
     display: grid;
-    align-self: center;
-    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: 500px;
+    width: 500px;
+    align-items: center;
+    justify-items: center;
+
+}
+
+.cell {
+    
+    font-size: 3rem;
 }
 
 .scoreHeader {
