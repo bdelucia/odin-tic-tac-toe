@@ -89,36 +89,66 @@ const ticTacToe = (function () {
     return { printBoard, makeMove, checkWin } /* makes the functions publically available, since board and currentPlayer aren't included, they are closed off (example of closure) and made private */
 })();
 
-const runGame = (function () {
-    ticTacToe.printBoard();
-    document.querySelector("#submitMove").addEventListener("click", () => {
-        ticTacToe.printBoard();
-        const row = parseInt(document.querySelector("#rowInput").value, 10);
-        const col = parseInt(document.querySelector("#colInput").value, 10);
+// const runGame = (function () {
+//     ticTacToe.printBoard();
+//     document.querySelector("#submitMove").addEventListener("click", () => {
+//         ticTacToe.printBoard();
+//         const row = parseInt(document.querySelector("#rowInput").value, 10);
+//         const col = parseInt(document.querySelector("#colInput").value, 10);
     
-        if (!isNaN(row) && !isNaN(col) && row >= 0 && row <= 2 && col >= 0 && col <= 2) {
-            const gameOver = ticTacToe.makeMove(row, col);
-            if (gameOver) {
-                document.querySelector("#submitMove").disabled = true; 
-            }
-        } else {
-            alert("Please enter valid row and column values (0-2).");
-        }
-    });
-})();
+//         if (!isNaN(row) && !isNaN(col) && row >= 0 && row <= 2 && col >= 0 && col <= 2) {
+//             const gameOver = ticTacToe.makeMove(row, col);
+//             if (gameOver) {
+//                 document.querySelector("#submitMove").disabled = true; 
+//             }
+//         } else {
+//             alert("Please enter valid row and column values (0-2).");
+//         }
+//     });
+// })();
 
 const playGame = (function () {
-    const cell1 = document.querySelector('#cell-1');
-    const cell2 = document.querySelector('#cell-2');
-    const cell3 = document.querySelector('#cell-3');
-    const cell4 = document.querySelector('#cell-4');
-    const cell5 = document.querySelector('#cell-5');
-    const cell6 = document.querySelector('#cell-6');
-    const cell7 = document.querySelector('#cell-7');
-    const cell8 = document.querySelector('#cell-8');
-    const cell9 = document.querySelector('#cell-9');
+    ticTacToe.printBoard();
 
-    
+    var gameOver;
+    const cells = document.querySelector(".cell");
+    cells.addEventListener('click', (e) => {
+        const cellID = e.target.id;
+        switch(cellID){
+            case 'cell-1':
+                gameOver = ticTacToe.makeMove(0,0);
+                break;
+            case 'cell-2':
+                gameOver = ticTacToe.makeMove(0,1);
+                break;
+            case 'cell-3':
+                gameOver = ticTacToe.makeMove(0,3);
+                break;
+            case 'cell-4':
+                gameOver = ticTacToe.makeMove(1,0);
+                break;
+            case 'cell-5':
+                gameOver = ticTacToe.makeMove(1,1);
+                break;
+            case 'cell-6':
+                gameOver = ticTacToe.makeMove(1,2);
+                break;
+            case 'cell-7':
+                gameOver = ticTacToe.makeMove(2,0);
+                break;
+            case 'cell-8':
+                gameOver = ticTacToe.makeMove(2,1);
+                break;
+            case 'cell-9':
+                gameOver = ticTacToe.makeMove(2,2);
+                break;
+        }
+        if(gameOver){
+            document.querySelector("#submitMove").disabled = true; 
+        }
+    })
+
+
 })();
 
 
