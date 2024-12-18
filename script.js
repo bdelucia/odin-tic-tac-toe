@@ -86,7 +86,7 @@ const ticTacToe = (function () {
         ];
         return winningLines.some(line => line.every(cell => cell === currentPlayer)); /* checks if there is atleast one winning line with all the cells filled by one player */
     }
-    return { printBoard, makeMove, checkWin } /* makes the functions publically available, since board and currentPlayer aren't included, they are closed off (example of closure) and made private */
+    return { printBoard, makeMove, checkWin, getCurrentPlayer: () => currentPlayer } /* makes the functions publically available, since board and currentPlayer aren't included, they are closed off (example of closure) and made private */
 })();
 
 // const runGame = (function () {
@@ -110,43 +110,60 @@ const ticTacToe = (function () {
 const playGame = (function () {
     ticTacToe.printBoard();
 
-    var gameOver;
-    const cells = document.querySelector(".cell");
-    cells.addEventListener('click', (e) => {
-        const cellID = e.target.id;
-        switch(cellID){
-            case 'cell-1':
-                gameOver = ticTacToe.makeMove(0,0);
-                break;
-            case 'cell-2':
-                gameOver = ticTacToe.makeMove(0,1);
-                break;
-            case 'cell-3':
-                gameOver = ticTacToe.makeMove(0,3);
-                break;
-            case 'cell-4':
-                gameOver = ticTacToe.makeMove(1,0);
-                break;
-            case 'cell-5':
-                gameOver = ticTacToe.makeMove(1,1);
-                break;
-            case 'cell-6':
-                gameOver = ticTacToe.makeMove(1,2);
-                break;
-            case 'cell-7':
-                gameOver = ticTacToe.makeMove(2,0);
-                break;
-            case 'cell-8':
-                gameOver = ticTacToe.makeMove(2,1);
-                break;
-            case 'cell-9':
-                gameOver = ticTacToe.makeMove(2,2);
-                break;
-        }
-        if(gameOver){
-            document.querySelector("#submitMove").disabled = true; 
-        }
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cells.addEventListener('click', (e) => {
+            const cellID = e.target.id;
+            let row, col;
+            switch(cellID){
+                case 'cell-1':
+                    row = 0;
+                    col = 0;
+                    break;
+                case 'cell-2':
+                    row = 0;
+                    col = 1;
+                    break;
+                case 'cell-3':
+                    row = 0;
+                    col = 2;
+                    break;
+                case 'cell-4':
+                    row = 1;
+                    col = 0;
+                    break;
+                case 'cell-5':
+                    row = 1;
+                    col = 1;
+                    break;
+                case 'cell-6':
+                    row = 1;
+                    col = 2;
+                    break;
+                case 'cell-7':
+                    row = 2;
+                    col = 0;
+                    break;
+                case 'cell-8':
+                    row = 2;
+                    col = 1;
+                    break;
+                case 'cell-9':
+                    row = 2;
+                    col = 2;
+                    break;
+            }
+            if(row !== undefined && col !== undefined){
+                const gameOver = ticTacToe.makeMove(row,col);
+                e.target.textContent = ticTacToe.getCurrentPlayer();
+
+                if(gameOver){
+                    cells.forEach(cell => cell.removeEventListener("click", () => {}));
+                }
+            }
+        })
     })
+    
 
 
 })();
