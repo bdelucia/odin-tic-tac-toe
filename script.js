@@ -12,23 +12,12 @@ const ticTacToe = (function () {
     /* Public functions */
 
     function resetGame(){
-        board = [ /* private */
+        board = [
             ["_", "_", "_"],
             ["_", "_", "_"],
             ["_", "_", "_"] 
         ]
         currentPlayer = "X";
-    }
-
-    /* Appends board with some | to show a grid in the webpage */
-    function printBoard() {
-        let gameBoard = document.querySelector(".gameBoard");
-        //gameBoard.innerHTML = "";
-        board.forEach(row => {
-            const rowDiv = document.createElement("div"); 
-            rowDiv.textContent = row.join(" | "); 
-            //gameBoard.appendChild(rowDiv); 
-        });
     }
 
     /* Marks cells in the board based on row and col given, returns true if winning condition achieved with the move */
@@ -40,7 +29,6 @@ const ticTacToe = (function () {
 
         if(board[row][col] === "_"){
             board[row][col] = currentPlayer;
-            printBoard()
             if(checkWin()){
                 alert(`${currentPlayer} wins!`);
                 if(currentPlayer === 'X'){
@@ -84,7 +72,7 @@ const ticTacToe = (function () {
         ];
         return winningLines.some(line => line.every(cell => cell === currentPlayer)); /* checks if there is atleast one winning line with all the cells filled by one player */
     }
-    return { printBoard, makeMove, checkWin, getCurrentPlayer: () => currentPlayer } /* makes the functions publically available, since board and currentPlayer aren't included, they are closed off (example of closure) and made private */
+    return { makeMove, checkWin, getCurrentPlayer: () => currentPlayer } /* makes the functions publically available, since board and currentPlayer aren't included, they are closed off (example of closure) and made private */
 })();
 
 const playGame = (function () {
