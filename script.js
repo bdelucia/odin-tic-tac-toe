@@ -18,7 +18,6 @@ const ticTacToe = (function () {
             ["_", "_", "_"] 
         ]
         currentPlayer = "X";
-        printBoard();
     }
 
     /* Appends board with some | to show a grid in the webpage */
@@ -53,13 +52,12 @@ const ticTacToe = (function () {
                 }
 
                 retryButton.textContent = "Play another";
-                retryButton.style.position = "fixed"
-                retryButton.style.top = "50%";        
-                retryButton.style.left = "50%";    
-                retryButton.style.transform = "translate(-50%, -50%)"; 
                 retryButton.addEventListener('click', () => {
                     resetGame();
-                    makeMoveButton.disabled = false;
+                    const cells = document.querySelectorAll('.cell');
+                    cells.forEach((cell) => {
+                        cell.textContent = "";
+                    })
                     retryButton.remove();
                 })
 
@@ -89,27 +87,7 @@ const ticTacToe = (function () {
     return { printBoard, makeMove, checkWin, getCurrentPlayer: () => currentPlayer } /* makes the functions publically available, since board and currentPlayer aren't included, they are closed off (example of closure) and made private */
 })();
 
-// const runGame = (function () {
-//     ticTacToe.printBoard();
-//     document.querySelector("#submitMove").addEventListener("click", () => {
-//         ticTacToe.printBoard();
-//         const row = parseInt(document.querySelector("#rowInput").value, 10);
-//         const col = parseInt(document.querySelector("#colInput").value, 10);
-    
-//         if (!isNaN(row) && !isNaN(col) && row >= 0 && row <= 2 && col >= 0 && col <= 2) {
-//             const gameOver = ticTacToe.makeMove(row, col);
-//             if (gameOver) {
-//                 document.querySelector("#submitMove").disabled = true; 
-//             }
-//         } else {
-//             alert("Please enter valid row and column values (0-2).");
-//         }
-//     });
-// })();
-
 const playGame = (function () {
-    
-
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
         cell.addEventListener('click', (e) => {
@@ -157,16 +135,12 @@ const playGame = (function () {
                 e.target.textContent = ticTacToe.getCurrentPlayer();
                 const gameOver = ticTacToe.makeMove(row,col);
                 
-
                 if(gameOver){
                     cells.forEach(cell => cell.removeEventListener("click", () => {}));
                 }
             }
         })
     })
-    
-
-
 })();
 
 
